@@ -25,7 +25,6 @@ public class App {
 
 //        Student st=session.get(Student.class,102);
 //        Student st=session.byId(Student.class).load(102);
-        Student st=session.byId(Student.class).getReference(102);
         System.out.println(st);
 
         session.close();

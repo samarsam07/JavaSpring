@@ -22,12 +22,6 @@ public class HomeController {
     public void modelData(Model m){
         m.addAttribute("name","Aleins");
     }
-    @GetMapping("getAleins")
-    public String getAleins(Model m){
-
-        m.addAttribute("results",repo.findAll());
-        return "showAleins";
-    }
 
     @RequestMapping("/")
     public String home() {
