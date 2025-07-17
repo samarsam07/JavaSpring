@@ -15,7 +15,7 @@ public class AlienController {
     @Autowired
     AleinRepo repo;
 
-    @GetMapping(path="aliens",produces = {"application/xml"})
+    @GetMapping(path="aliens")
     public List<Alein> getAleins(){
 
         List<Alein> aleins=repo.findAll();
