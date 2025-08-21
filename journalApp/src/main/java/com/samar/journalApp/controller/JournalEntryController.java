@@ -26,10 +26,6 @@ public class JournalEntryController {
     @Autowired
     UserService userService;
 
-//    @GetMapping("/all")
-//    public ResponseEntity<List<JournalEntry>> getAllJournalEntries(){
-//        return journalService.getAllJournalEntries();
-//    }
     @GetMapping("/id/{myId}")
     public ResponseEntity<JournalEntry >getJournalEntryById(@PathVariable ObjectId myId){
         return journalService.getJournalEntryById(myId);
