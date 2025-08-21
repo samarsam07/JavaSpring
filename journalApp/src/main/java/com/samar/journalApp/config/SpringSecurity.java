@@ -62,7 +62,7 @@ import org.springframework.security.web.SecurityFilterChain;
                     .build();
         }
 
-        // ✅ New way: expose AuthenticationManager bean
+        //  New way: expose AuthenticationManager bean
         @Bean
         public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
             return http.getSharedObject(AuthenticationManagerBuilder.class)
