@@ -1,9 +1,13 @@
 package com.samar.journalApp.controller;
 
+import com.samar.journalApp.api.response.WeatherResponse;
 import com.samar.journalApp.model.User;
+import com.samar.journalApp.service.ApiCheck;
 import com.samar.journalApp.service.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,11 +19,10 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
     @Autowired
-    UserService userService;
-//    @GetMapping
-//    public ResponseEntity<List<User>> getAllUsers(){
-//        return userService.getAllUsers();
-//    }
+    private UserService userService;
+    @Autowired
+    private ApiCheck apiCheck;
+
     @GetMapping
     public ResponseEntity<User> getUserByUserName(){
         Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
@@ -45,5 +48,17 @@ public class UserController {
     @DeleteMapping("/id/{myId}")
     public ResponseEntity<User> deleteById(@PathVariable ObjectId myId){
         return userService.deleteUserById(myId);
+    }
+    @GetMapping("/greeting")
+    public ResponseEntity<?> greeting() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        WeatherResponse response = apiCheck.getWeather("Mumbai");
+        String greet = "";
+        if (response != null) {
+            greet = " weather feels like " + response.getCurrent().getFeelslike();
+        }
+        return new ResponseEntity<>("hi " + username + greet, HttpStatus.OK);
+
     }
 }
