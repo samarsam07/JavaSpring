@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class LoggingAspect {
+
     private static  final Logger LOGGER= LoggerFactory.getLogger(LoggingAspect.class);
     @Before("execution(public * com.samar.springmvcDemo.AlienController.getAleins())")
     public void logBefore(){

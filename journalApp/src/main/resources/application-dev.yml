@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: Journal App
+  data:
+    mongodb:
+      uri: mongodb+srv://root:Samarenter%4012@samar.eos2q4v.mongodb.net/?retryWrites=true&w=majority&appName=Samar
+      database: journaldb
+      auto-index-creation: true
+
+server:
+  port: 8080
+  servlet:
+    context-path: /app

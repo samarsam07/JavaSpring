@@ -16,12 +16,14 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
+//    @GetMapping
+//    public ResponseEntity<List<User>> getAllUsers(){
+//        return userService.getAllUsers();
+//    }
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers(){
-        return userService.getAllUsers();
-    }
-    @GetMapping("/{username}")
-    public ResponseEntity<User> getUserByUserName(@PathVariable String username){
+    public ResponseEntity<User> getUserByUserName(){
+        Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
+        String username=authentication.getName();
         return userService.getUserByUserName(username);
     }
     @GetMapping("/id/{myId}")
