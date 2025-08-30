@@ -1,8 +1,5 @@
 package com.samar.journalApp;
 
-import com.samar.journalApp.model.User;
-import com.samar.journalApp.repository.UserRepositoryImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
