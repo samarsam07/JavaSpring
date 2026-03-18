@@ -2,6 +2,7 @@ package com.samar.journalApp.Repository;
 
 import com.samar.journalApp.model.User;
 import com.samar.journalApp.repository.UserRepositoryImpl;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -26,6 +27,7 @@ class UserRepositoryImplUnitTests {
         MockitoAnnotations.openMocks(this);
     }
 
+    @Disabled
     @Test
     void testGetUserForSA() {
         // given

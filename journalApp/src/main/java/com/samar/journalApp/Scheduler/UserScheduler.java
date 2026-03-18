@@ -6,6 +6,9 @@ import com.samar.journalApp.model.JournalEntry;
 import com.samar.journalApp.model.User;
 import com.samar.journalApp.repository.UserRepositoryImpl;
 import com.samar.journalApp.service.EmailService;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -18,15 +21,17 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
+@Slf4j
 public class UserScheduler {
 
+    private static final Logger log = LoggerFactory.getLogger(UserScheduler.class);
     @Autowired
     private UserRepositoryImpl userRepository;
     @Autowired
     private EmailService emailService;
 
 
-//    @Scheduled(cron = "0 * * ? * *")
+    @Scheduled(cron = "0 * * ? * *")
     public void fetchUserAndSaMail(){
         List<User> users=userRepository.getUserForSA();
         for(User user:users){
@@ -35,8 +40,9 @@ public class UserScheduler {
                     .filter(
                             x -> x.getDate()
                                     .isAfter(LocalDateTime.now()
-                                            .minus(7, ChronoUnit.DAYS)))
-                    .map(x->x.getSentiment())
+                                            .minus(30, ChronoUnit.DAYS)))
+
+                    .map(x -> x.getSentiment())
                     .collect(Collectors.toList());
             Map<Sentiment,Integer> sentimentCount=new HashMap<>();
             for(Sentiment sentiment: filtered){
@@ -53,6 +59,7 @@ public class UserScheduler {
             }
             if(mostFreq!=null){
                 emailService.sendEmail(user.getEmail(),"Sentiment for last 7 days",mostFreq.toString());
+                log.info("send");
             }
 
         }
