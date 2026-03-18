@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import com.demo.model.Customer;
 import com.demo.model.Order;
@@ -40,20 +41,28 @@ public class App {
 //			session.persist(teacher);
 //			session.persist(student);
 
-			Customer customer = new Customer();
-			customer.setCustomerName("samar");
+//			Customer customer = new Customer();
+//			customer.setCustomerName("bong");
+//
+//			Order order1 = new Order();
+//			order1.setCustomer(customer);
+//			order1.setOrderName("ps5");
+//
+//			Order order2 = new Order();
+//			order2.setCustomer(customer);
+//			order2.setOrderName("intel i-7");
+//
+//			customer.setOrders(List.of(order1, order2));
+//
+//			session.persist(customer);
 
-			Order order1 = new Order();
-			order1.setCustomer(customer);
-			order1.setOrderName("rtx-3050");
+			String hql = "From Customer";
+			Query<Customer> query = session.createQuery(hql);
+			List<Customer> customers = query.list();
 
-			Order order2 = new Order();
-			order2.setCustomer(customer);
-			order2.setOrderName("ddr5");
-
-			customer.setOrders(List.of(order1, order2));
-
-			session.persist(customer);
+			for (Customer customer : customers) {
+				System.out.println(customer.toString());
+			}
 			transaction.commit();
 			System.out.println("Done");
 

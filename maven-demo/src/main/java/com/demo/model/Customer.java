@@ -43,4 +43,9 @@ public class Customer {
 		this.orders = orders;
 	}
 
+	@Override
+	public String toString() {
+		return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", orders=" + orders + "]";
+	}
+
 }
